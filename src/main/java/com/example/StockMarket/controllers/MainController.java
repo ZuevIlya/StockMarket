@@ -1,7 +1,9 @@
 package com.example.StockMarket.controllers;
 
 import com.example.StockMarket.models.Person;
+import com.example.StockMarket.models.User;
 import com.example.StockMarket.repositories.PersonRepository;
+import com.example.StockMarket.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,6 +18,9 @@ public class MainController {
 
     @Autowired
     private PersonRepository personRepository;
+
+    @Autowired
+    private UserRepository userRepository;
 
     @GetMapping("/")
     public String home() {
@@ -33,8 +38,8 @@ public class MainController {
 
     @GetMapping("/getpersons")
     public String getPersons() {
-        List<Person> list = personRepository.findAll();
-        list.forEach(x -> System.out.println(x.getName()));
+        List<User> list = userRepository.findAll();
+        list.forEach(x -> System.out.println(x.getUsername() + " " + x.getPassword()));
         return "home";
     }
 }
