@@ -20,12 +20,11 @@ public class UserController {
 
 
     @GetMapping("/login")
-    public String login() {
+    public String getLogin() {
         System.out.println("пришли в логин");
-        List<User> list = userRepository.findAll();
-        list.forEach(x -> System.out.println(x.getUsername() + " " + x.getPassword()));
         return "login";
     }
+
 
     @GetMapping("/registration")
     public String registration() {
@@ -35,6 +34,7 @@ public class UserController {
 
     @PostMapping("/registration")
     public String createUser(User user) {
+        System.out.println("Успешно зарегистрировались");
         userService.createUser(user);
         return "redirect:/login";
     }
