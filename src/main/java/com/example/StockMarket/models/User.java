@@ -17,7 +17,7 @@ public class User implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String username;
-    private int score;
+    private double score;
     private String password;
 
     private String email;
@@ -42,11 +42,11 @@ public class User implements UserDetails {
         this.username = username;
     }
 
-    public int getScore() {
+    public double getScore() {
         return score;
     }
 
-    public void setScore(int score) {
+    public void setScore(double score) {
         this.score = score;
     }
 
