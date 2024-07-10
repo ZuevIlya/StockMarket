@@ -1,11 +1,24 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" th:href="@{/styles.css}">
 </head>
 <body>
 hello
-<a class="nav-link px-2 link-dark" href="/stock/pull_stocks">Перейти к акциям</a>
+<a class="nav-link px-2 link-dark" href="/stock/pull_stocks">Перейти к покупке акций</a>
+<h3>Мои акции</h3>
+<table>
+    <tr><th>ID</th><th>Название акции</th><th>Количество</th><th>Текущая цена акции</th></tr> <!--ряд с ячейками заголовков-->
+    <div th:each="element : ${marketList}" class="alert alert-info mt-2">
+        <tr>
+            <td><p th:text="${element.id}"/></td>
+            <td><p th:text="${element.stock.name}"/></td>
+            <td><p th:text="${element.count}"/></td>
+            <td><p th:text="${element.purchase_price}"/></td>
+        </tr> <!--ряд с ячейками тела таблицы-->
+    </div>
+</table>
 </body>
 </html>
