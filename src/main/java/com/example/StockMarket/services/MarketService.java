@@ -32,15 +32,18 @@ public class MarketService {
         user.setScore(user.getScore() - full_price);
         List<Market> marketList = marketRepository.findAllByUser(user);
         boolean findStockInMarket = false;
+        // Если акция уже была куплена
         for (Market temp: marketList) {
             if (temp.getStock().getName().equals(name)) {
+                double middle_price = (temp.getPurchase_price() * temp.getCount() + temp.getStock().getPrice() * count) / (temp.getCount() + count);
                 temp.setCount(temp.getCount() + count);
-                temp.setPurchase_price(stock.getPrice());
+                temp.setPurchase_price(middle_price);
                 findStockInMarket = true;
                 marketRepository.save(temp);
                 break;
             }
         }
+        // Если акции ещё не было
         if (!findStockInMarket) {
             Market market = new Market();
             market.setUser(user);
@@ -50,5 +53,29 @@ public class MarketService {
             marketRepository.save(market);
         }
         userRepository.save(user);
+    }
+
+    public Market getMarketbyStockName(List<Market> marketList, String name) {
+        for (Market market: marketList) {
+            if (market.getStock().getName().equals(name)) {
+                System.out.println(market.getUser().getUsername() + " " + market.getStock().getName() + " " + market.getCount());
+                return market;
+            }
+        }
+        return null;
+    }
+
+    public void sellStock(Market market, User user, int count) {
+        double full_price = market.getStock().getPrice() * count;
+        user.setScore(user.getScore() + full_price);
+        userRepository.save(user);
+        // Если продаёт все акции - удаляем запись
+        if (market.getCount() == count) {
+            marketRepository.delete(market);
+        } else {
+            market.setCount(market.getCount() - count);
+            marketRepository.save(market);
+        }
+
     }
 }

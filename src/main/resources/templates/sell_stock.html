@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<div class="container mt-5">
+  <h1>Продажа акции</h1>
+  <p th:text="'Название акции: ' + ${name}"/>
+  <p th:text="'Количество ваших акций: ' + ${count}"/>
+  <p th:text="'Цена одной акции: ' + ${price}"/>
+
+  <form method="post">
+    <div th:text = "${market_error}" style="color:red"/>
+    <div th:text = "${count_error}" style="color:red"/>
+    <input type="text" name="count" placeholder="Количество акций на продажу" class="form-control"><br>
+    <button type="submit" class="btn btn-success">Продать акции</button>
+    <input type="hidden" name="_csrf" value="{{_csrf.token}}" />
+  </form>
+
+</div>
+</body>
+</html>

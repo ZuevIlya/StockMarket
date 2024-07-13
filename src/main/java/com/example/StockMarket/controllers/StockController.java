@@ -57,35 +57,4 @@ public class StockController {
         stockService.downloadStocks();
         return "redirect:/stock/pull_stocks";
     }
-
-    @GetMapping("/stock/pull_stocks/{name}")
-    public String buyStocksGet(@PathVariable(value = "name") String name, Model model,
-                               @AuthenticationPrincipal User user) {
-        Stock stock = stockRepository.findByName(name);
-        model.addAttribute("user", user);
-        model.addAttribute("stock", stock);
-        return "buy_stock";
-    }
-
-    @PostMapping("/stock/pull_stocks/{name}")
-    public String buyStockPost(@PathVariable(value = "name") String name,
-                               @RequestParam int count,
-                               @AuthenticationPrincipal User user,
-                               Model model) {
-        Map<String, String> errorsMap = new HashMap<>();
-        Stock stock = stockRepository.findByName(name);
-        double full_price = stock.getPrice() * count;
-        if (full_price > user.getScore()) {
-            errorsMap.put("score_error", "Недостаточно средств на балансе");
-        }
-        if (!errorsMap.isEmpty()) {
-            model.addAttribute("score_error", errorsMap.get("score_error"));
-            model.addAttribute("user", user);
-            model.addAttribute("stock", stock);
-            return "buy_stock";
-        } else {
-            marketService.buyStock(name, count, user);
-            return "redirect:/stock/pull_stocks";
-        }
-    }
 }

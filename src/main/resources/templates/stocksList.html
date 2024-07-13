@@ -16,7 +16,7 @@
             <td><p th:text="${element.name}"/></td>
             <td><p th:text="${element.price}"/></td>
             <td><p th:text="${element.isActive}"/></td>
-            <td><a class="nav-link px-2 link-dark" th:href="'/stock/pull_stocks/' + ${element.name}"><p th:text="'Купить акцию ' + ${element.name}"/></a></td>
+            <td><a class="nav-link px-2 link-dark" th:href="'/market/buy/' + ${element.name}"><p th:text="'Купить акцию ' + ${element.name}"/></a></td>
         </tr> <!--ряд с ячейками тела таблицы-->
     </div>
 </table>
