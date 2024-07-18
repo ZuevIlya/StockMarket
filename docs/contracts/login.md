@@ -6,4 +6,4 @@
 | Method | Status | URL | Response |
 | --- | --- | --- | --- |
 | POST | 200 | /auth/login | <br/><pre lang='json'>{&#13; "message": "ok", &#13;}</pre>|
-| POST | 401 | /auth/registration | <br><pre lang="json">{&#13; "message": "user does not exist", &#13;}</pre>
+| POST | 401 | /auth/login | <br><pre lang="json">{&#13; "message": "user does not exist", &#13;}</pre>
