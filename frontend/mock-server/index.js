@@ -1,4 +1,6 @@
 import express from "express"
+import { user } from "./mocks/user.js";
+
 
 const app = express();
 
@@ -13,6 +15,6 @@ app.get('/ping', (req, res) => {
 })
 
 app.listen(PORT, () => {
-    console.log(`\nServer is running on http://localhost:${PORT}\n`)
+    console.log(`\nServer is running on http://localhost:${PORT}\n`);
 })
 
